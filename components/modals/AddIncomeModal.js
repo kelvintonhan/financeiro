@@ -92,7 +92,7 @@ function AddIncomeModal({show, onClose}){
 
         {income.map((i) => {
           return (
-            <div className="flex justify-between items-center" key={i.id}>
+            <div className="flex justify-between items-center py-2 px-4 bg-stone-600 rounded-xl" key={i.id}>
               <div>
                 <p className="font-semibold">{i.description}</p>
                 <small className="text-xs">{formatDate(i.createdAt)}</small>

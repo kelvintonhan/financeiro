@@ -93,14 +93,13 @@ function AddExpensesModal({show, onClose}) {
                 ref={titleRef}
                 className="mb-2 lg:mb-0"
             />
-            <label className="mb-2 lg:mb-0">Cor</label>
-            <input
-                type="color"
-                className="w-16 h-10 mb-2 lg:mb-0"
-                ref={colorRef}
-            />
             
-            <div className="mb-2 lg:mb-0">
+            <div className="items-center gap-2 flex mb-2 lg:flex lg:mb-0">
+                <label className="mb-2 lg:mb-0">Cor</label>
+                <input type="color" className="w-16 h-10 mb-2 lg:mb-0" ref={colorRef} />
+            </div>
+
+            <div className="mb-2 lg:flex lg:mb-0 lg:gap-2">
                 <button onClick={addCategoryHandler} className="btn btn-primary-outline mr-2 lg:mr-0">Criar</button>
                 <button onClick={() => setShowAddExpense(false)} className="btn btn-danger">Cancelar</button>
             </div>

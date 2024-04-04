@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import '@fontsource/roboto'; // Importa a fonte Roboto
 import "./globals.css";
 import Nav from "@/components/Navigation";
 import FinanceContextProvider from "@/lib/store/finance-context";

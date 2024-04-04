@@ -91,6 +91,15 @@ export default function Home() {
               },
             ],
           }}
+          options={{
+            plugins: {
+              legend: {
+                labels: {
+                  color: 'white',
+                }
+              }
+            }
+          }}
         />
       </div>
     </section>

@@ -55,7 +55,7 @@ function ViewExpenseModal({show, onClose, expense}){
                     return (
                         <div
                         key={item.id}
-                        className="flex items-center justify-between">
+                        className="flex items-center justify-between py-2 px-4 my-2 bg-stone-600 rounded-xl">
                             <small>
                             {item.createdAt && (
                                 <>{formatDateTime(item.createdAt)}</>
