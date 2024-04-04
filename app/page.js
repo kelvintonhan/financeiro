@@ -94,6 +94,7 @@ export default function Home() {
           options={{
             plugins: {
               legend: {
+                position: 'bottom',
                 labels: {
                   color: 'white',
                 }
