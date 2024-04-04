@@ -67,8 +67,9 @@ function AddIncomeModal({show, onClose}){
             min={0.01}
             step={0.01}
             placeholder="Digite o valor"
+            pattern="[0-9]*" // Adicionando o atributo pattern com uma expressão regular que permite apenas números
             required
-          />
+          /> 
         </div>
         <div className="input-group">
           <label htmlFor="description">Descrição:</label>
