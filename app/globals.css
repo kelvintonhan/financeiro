@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-stone-100 bg-stone-900;
+  }
+
+  button {
+    @apply transition-all duration-100 hover:scale-110;
+  }
+
+  input {
+    @apply px-4 py-2 bg-stone-600 rounded-xl;
+  }
+}
+
+@layer utilities {
+  .btn {
+    @apply self-start px-4 py-2 text-sm capitalize rounded-xl;
+  }
+
+  .btn-primary {
+    @apply border bg-stone-700 border-stone-700 text-yellow-400;
+  }
+
+  .btn-primary-outline {
+    @apply border border-yellow-400 text-yellow-400;
+  }
+
+  .btn-danger {
+    @apply text-white bg-red-600 border border-red-600;
+  }
+
+  .input-group {
+    @apply flex flex-col gap-4;
+  }
+}
