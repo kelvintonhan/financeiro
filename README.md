@@ -19,7 +19,7 @@ Este projeto faz parte do Trabalho de Conclusão de Curso da pós-graduação em
 4. Execute o seguinte comando para instalar as dependências:
 
 npm install
-# ou
+ou
 yarn install
 
 ## Configuração do Firebase
@@ -33,15 +33,15 @@ yarn install
 * Após instalar as dependências e configurar o Firebase, execute o seguinte comando para iniciar o servidor de desenvolvimento:
 
 npm run dev
-# ou
+ou
 yarn dev
 
 * O servidor será iniciado em http://localhost:3000. Você pode acessar esta URL em seu navegador para visualizar o aplicativo.
 
 ## Estrutura do Projeto
 
-/pages: Contém os componentes React que definem as páginas do aplicativo.
-/components: Contém componentes reutilizáveis que são compartilhados entre diferentes partes do aplicativo.
-/lib: Contém utilitários e configurações compartilhadas, incluindo a integração com o Firebase.
-/public: Contém arquivos estáticos, como imagens e ícones.
-jsconfig.json, next.config.mjs, postcss.config.js, tailwind.config.js: Arquivos de configuração do Next.js, PostCSS e Tailwind CSS.
+* /pages: Contém os componentes React que definem as páginas do aplicativo.
+* /components: Contém componentes reutilizáveis que são compartilhados entre diferentes partes do aplicativo.
+* /lib: Contém utilitários e configurações compartilhadas, incluindo a integração com o Firebase.
+* /public: Contém arquivos estáticos, como imagens e ícones.
+* jsconfig.json, next.config.mjs, postcss.config.js, tailwind.config.js: Arquivos de configuração do Next.js, PostCSS e Tailwind CSS.
