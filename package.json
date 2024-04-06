@@ -11,6 +11,7 @@
   "dependencies": {
     "@fontsource/roboto": "^5.0.12",
     "chart.js": "^4.4.2",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "date-fns": "^3.6.0",
     "firebase": "^10.10.0",
     "next": "14.1.4",

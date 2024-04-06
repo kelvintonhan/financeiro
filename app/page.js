@@ -2,15 +2,14 @@
 import ExpensiveCategoryItem from "@/components/ExpenseCategoryItem";
 import { currencyFormater } from "@/lib/utils";
 import { useState, useContext, useEffect } from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Doughnut } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import AddIncomeModal from "@/components/modals/AddIncomeModal";
 import AddExpensesModal from "@/components/modals/AddExpensesModal";
 import { financeContext } from '@/lib/store/finance-context'
 import Signin from "@/components/Signin";
 import { authContext } from "@/lib/store/auth-context";
-
-ChartJS.register(ArcElement, Tooltip, Legend);
+import 'chart.js/auto';
+import 'chartjs-plugin-datalabels'; // Importando o plugin para adicionar os rótulos de dados
 
 export default function Home() {
 
@@ -81,7 +80,7 @@ export default function Home() {
                 <button onClick={() => setShowChart(!showChart)} className="btn btn-primary mb-8 lg:w-auto w-80">{showChart ? "Ocultar Gráfico" : "Mostrar Gráfico"}</button>
               </div>
               {showChart && (
-                <Doughnut
+                <Pie
                   data={{
                     labels: expenses.map((expense) => expense.title),
                     datasets: [
@@ -101,6 +100,19 @@ export default function Home() {
                         labels: {
                           color: 'white',
                         }
+                      },
+                      datalabels: { // Configurações para adicionar os rótulos de dados
+                        color: '#fff',
+                        formatter: (value, ctx) => {
+                          const label = ctx.chart.data.labels[ctx.dataIndex];
+                          const total = ctx.dataset.data.reduce((acc, data) => acc + data, 0);
+                          const percentage = ((value / total) * 100).toFixed(2) + '%';
+                          return percentage;
+                        },
+                        font: {
+                          size: '14',
+                          weight: 'bold'
+                        }
                       }
                     }
                   }}
@@ -113,4 +125,3 @@ export default function Home() {
     </>
   );
 }
-  
