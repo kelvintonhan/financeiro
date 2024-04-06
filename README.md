@@ -18,9 +18,11 @@ Este projeto faz parte do Trabalho de Conclusão de Curso da pós-graduação em
 3. Navegue até o diretório do projeto no terminal.
 4. Execute o seguinte comando para instalar as dependências:
 
-npm install
-ou
-yarn install
+```bash
+npm run dev
+# or
+yarn dev
+```
 
 ## Configuração do Firebase
 
@@ -32,9 +34,11 @@ yarn install
 
 * Após instalar as dependências e configurar o Firebase, execute o seguinte comando para iniciar o servidor de desenvolvimento:
 
+```bash
 npm run dev
-ou
+# or
 yarn dev
+```
 
 * O servidor será iniciado em http://localhost:3000. Você pode acessar esta URL em seu navegador para visualizar o aplicativo.
 
