@@ -100,9 +100,7 @@ function AddIncomeModal({show, onClose}){
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Adicionar
-        </button>
+        <button type="submit" className="btn btn-primary w-full lg:w-auto">Adicionar</button>
       </form>
 
       <div className="flex flex-col gap-4 mt-6">

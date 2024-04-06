@@ -6,7 +6,11 @@ import { authContext } from "@/lib/store/auth-context";
 function Nav() {
   const {user, loading, logout} = useContext(authContext);
 
-    return (
+  if (!user || loading) {
+    return null; // Retorna null se o usuário não estiver autenticado ou se o carregamento estiver em andamento
+  }
+    
+  return (
         <header className="px-6 py-4 mx-auto bg-stone-600">
         <div className="flex items-center justify-between">
           

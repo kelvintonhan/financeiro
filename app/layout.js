@@ -7,7 +7,6 @@ import AuthContextProvider from "@/lib/store/auth-context";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,12 +16,13 @@ export const metadata = {
 
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <body>
         <AuthContextProvider>
         <FinanceContextProvider>
-          <ToastContainer />
+          <ToastContainer autoClose={2000} style={{ width: "auto" }}/>
           <Nav />
           {children}
         </FinanceContextProvider>

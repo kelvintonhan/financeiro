@@ -11,13 +11,44 @@ const formatDateTime = (timestamp) => {
     return format(date, 'dd/MM/yyyy HH:mm');
 };
 
-function ViewExpenseModal({show, onClose, expense}){
+function DeleteCategoryConfirmation({ confirmDeleteCategory, cancelDeleteCategory }) {
+    return (
+        <div className="flex items-center justify-center py-2 px-4 mt-4 mb-2 bg-stone-600 rounded-xl">
+            <div className="flex flex-col gap-2">
+                <p>Deseja apagar esta categoria?</p>
+                <div className="flex gap-2">
+                    <button className="btn btn-primary w-1/2" onClick={confirmDeleteCategory}>Sim</button>
+                    <button className="btn btn-primary-outline w-1/2" onClick={cancelDeleteCategory}>Cancelar</button>
+                </div>
+            </div>
+        </div>
+    );
+}
 
-    const {deleteExpenseItem, deleteExpenseCategory} = useContext(financeContext);
+function DeleteItemConfirmation({ itemToDelete, confirmDeleteItem, cancelDeleteItem }) {
+    return (
+        <div className="flex items-center justify-center py-2 px-4 mt-4 mb-2 bg-stone-600 rounded-xl">
+            <div className="flex flex-col gap-2">
+                <p className="flex items-center justify-center text-center text-">Deseja apagar este item?</p>
+                <p className="flex items-center justify-center">{currencyFormater(itemToDelete.amount)}</p>
+                <div className="flex gap-2">
+                    <button className="btn btn-primary w-1/2" onClick={confirmDeleteItem}>Sim</button>
+                    <button className="btn btn-primary-outline w-1/2" onClick={cancelDeleteItem}>Cancelar</button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function ViewExpenseModal({ show, onClose, expense }) {
+
+    const { deleteExpenseItem, deleteExpenseCategory } = useContext(financeContext);
     const [showConfirmation, setShowConfirmation] = useState(false);
-    const [itemToDelete, setItemToDelete] = useState(null);
+    const [confirmationType, setConfirmationType] = useState(null); 
+    const [itemToDelete, setItemToDelete] = useState(null); // Adicionando a variável itemToDelete
 
     const deleteExpenseHandler = async () => {
+        setConfirmationType("category");
         setShowConfirmation(true);
     }
 
@@ -25,7 +56,7 @@ function ViewExpenseModal({show, onClose, expense}){
         try {
             await deleteExpenseCategory(expense.id);
             toast.success("Categoria removida!");
-            onClose(); // Fechar o modal após a exclusão
+            onClose(); 
         } catch (error) {
             console.log(error.message);
             toast.error(error.message);
@@ -37,7 +68,8 @@ function ViewExpenseModal({show, onClose, expense}){
     }
 
     const deleteExpenseItemHandler = async (item) => {
-        setItemToDelete(item);
+        setItemToDelete(item); // Define o item a ser excluído
+        setConfirmationType("item");
         setShowConfirmation(true);
     }
 
@@ -60,7 +92,6 @@ function ViewExpenseModal({show, onClose, expense}){
 
     const cancelDeleteItem = () => {
         setShowConfirmation(false);
-        setItemToDelete(null);
     }
 
     return (
@@ -70,24 +101,19 @@ function ViewExpenseModal({show, onClose, expense}){
                 <button onClick={deleteExpenseHandler} className="btn btn-danger">Apagar categoria</button>
             </div>
 
-            {/* Modal de confirmação para apagar categoria ou item */}
-            {showConfirmation && (
-                <div className="flex items-center justify-between py-2 px-4 mt-4 mb-2 bg-stone-600 rounded-xl">
-                    <div className="flex flex-col gap-2">
-                        {itemToDelete ? (
-                            <>
-                                <p>Tem certeza que deseja apagar este item?</p>
-                                <p>{currencyFormater(itemToDelete.amount)}</p>
-                            </>
-                        ) : (
-                            <p>Tem certeza que deseja apagar esta categoria?</p>
-                        )}
-                        <div className="flex gap-2">
-                            <button className="btn btn-primary w-1/2" onClick={itemToDelete ? confirmDeleteItem : confirmDeleteCategory}>Sim</button>
-                            <button className="btn btn-primary-outline w-1/2" onClick={itemToDelete ? cancelDeleteItem : cancelDeleteCategory}>Cancelar</button>
-                        </div>
-                    </div>
-                </div>
+            {showConfirmation && confirmationType === "category" && (
+                <DeleteCategoryConfirmation
+                    confirmDeleteCategory={confirmDeleteCategory}
+                    cancelDeleteCategory={cancelDeleteCategory}
+                />
+            )}
+
+            {showConfirmation && confirmationType === "item" && (
+                <DeleteItemConfirmation
+                    itemToDelete={itemToDelete}
+                    confirmDeleteItem={confirmDeleteItem}
+                    cancelDeleteItem={cancelDeleteItem}
+                />
             )}
 
             <div>
@@ -95,21 +121,21 @@ function ViewExpenseModal({show, onClose, expense}){
                 {expense.items.map((item) => {
                     return (
                         <div
-                        key={item.id}
-                        className="flex items-center justify-between py-2 px-4 my-2 bg-stone-600 rounded-xl">
+                            key={item.id}
+                            className="flex items-center justify-between py-2 px-4 my-2 bg-stone-600 rounded-xl">
                             <small>
-                            {item.createdAt && (
-                                <>{formatDateTime(item.createdAt)}</>
-                            )}
+                                {item.createdAt && (
+                                    <>{formatDateTime(item.createdAt)}</>
+                                )}
                             </small>
                             <p className="flex items-center gap-2">
                                 {currencyFormater(item.amount)}
-                                <button onClick={()=>{
+                                <button onClick={() => {
                                     deleteExpenseItemHandler(item);
-                                }}><FaRegTrashAlt/></button>
+                                }}><FaRegTrashAlt /></button>
                             </p>
                         </div>
-    
+
                     );
                 })}
             </div>

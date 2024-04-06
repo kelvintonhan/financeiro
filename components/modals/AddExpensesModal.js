@@ -60,6 +60,8 @@ function AddExpensesModal({show, onClose}) {
         }
     }
 
+    
+
     return (
     <Modal show={show} onClose={onClose}>
         <div className="flex flex-col gap-4">
@@ -121,7 +123,7 @@ function AddExpensesModal({show, onClose}) {
                 style={{
                     boxShadow: expense.id === selectedCategory ? "0px 0px 8px" : "none",
                 }}
-                className="flex items-center justify-between px-4 py-4 bg-stone-700 rounded-2xl"
+                className="flex items-center justify-between px-4 py-2 lg:py-4 bg-stone-700 rounded-2xl"
                 >
                 <div className="flex items-center gap-2">
                     <div
@@ -142,7 +144,7 @@ function AddExpensesModal({show, onClose}) {
 
         {expenseAmount > 0 && selectedCategory && (
             <div className="mt-6">
-            <button className="btn btn-primary"
+            <button className="btn btn-primary w-full lg:w-auto"
             onClick={addExpenseItemHandler}>
                 Adicionar
             </button>
