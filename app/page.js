@@ -74,7 +74,7 @@ export default function Home() {
           </section>
         </div>
 
-        <div className="w-full md:w-1/2 mx-0 md:mx-8 my-auto">
+        <div className="w-full md:w-1/2 mx-0 md:mx-8 p-3">
           <section className="flex flex-col justify-center items-center">
             <div className="w-full sm:w-auto mx-auto flex flex-col justify-center items-center">
               <div className="flex flex-col items-center justify-center">
