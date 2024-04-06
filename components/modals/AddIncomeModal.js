@@ -1,8 +1,8 @@
-import { useRef, useEffect, useContext } from "react";
+import { useRef, useEffect, useContext, useState } from "react";
 import { currencyFormater } from "@/lib/utils";
 import Modal from "@/components/Modal";
 import {financeContext} from "@/lib/store/finance-context"
-import {FaRegTrashAlt} from 'react-icons/fa';
+import {FaRegTrashAlt, FaRegEdit} from 'react-icons/fa';
 import {authContext} from "@/lib/store/auth-context"
 import { format } from 'date-fns';
 import { toast } from "react-toastify";
@@ -47,6 +47,25 @@ function AddIncomeModal({show, onClose}){
             toast.error(error.message);
         }
       };
+
+
+      const editIncomeEntryHandler = (incomeId, newAmount) => {
+        const updatedIncome = income.map(i => {
+            if (i.id === incomeId) {
+                return {
+                    ...i,
+                    amount: newAmount
+                };
+            }
+            return i;
+        });
+
+        // Aqui você precisa chamar uma função para atualizar o estado do contexto financeiro com a nova lista de renda atualizada
+        // Exemplo: updateIncomeList(updatedIncome);
+
+        setEditAmount(null); // Limpar o valor editado após a edição
+        toast.success("Valor atualizado!");
+    };
 
       const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -99,10 +118,10 @@ function AddIncomeModal({show, onClose}){
               </div>
               <p className="flex items-center gap-2">
                 {currencyFormater(i.amount)}</p>
-                <button onClick={()=>{
-                  deleteIncomeEntryHandler(i.id);
-                }}>
-                <FaRegTrashAlt/>
+                
+              
+                <button onClick={()=>{deleteIncomeEntryHandler(i.id);}}>
+                  <FaRegTrashAlt/>
                 </button>
             </div>
           );

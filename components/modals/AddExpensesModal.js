@@ -79,7 +79,7 @@ function AddExpensesModal({show, onClose}) {
         {expenseAmount > 0 && (
         <div className="flex flex-col gap-4 mt-6">
         <div className="flex items-center justify-between">
-            <h3 className="text-2xl">Selecione a categoria</h3>
+            <h3 className="text-xl lg:text-2xl">Selecione a categoria</h3>
             <button onClick={() => {
                 setShowAddExpense(true);
             }} className="text-yellow-400">+ Nova categoria</button>

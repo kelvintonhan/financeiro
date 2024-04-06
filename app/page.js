@@ -18,6 +18,7 @@ export default function Home() {
   const [showAddIcomeModal, setShowAddIncomeModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
 
+
   const [balance, setBalance] = useState(0);
   const { expenses, income } = useContext(financeContext);
 
@@ -36,6 +37,9 @@ export default function Home() {
   if(!user) {
     return <Signin/>;
   }
+  
+  // Determinar a cor do saldo com base no seu valor
+  const balanceColorClass = balance >= 0 ? "text-green-500" : "text-red-500";
 
   return (
     <>
@@ -51,17 +55,17 @@ export default function Home() {
 
 
 
-<main className="container max-w-6xl px-6 mx-auto flex flex-col md:flex-row">
+<main className="container max-w-6xl px-6 mx-auto my-4 flex flex-col md:flex-row">
   <div className="w-full md:w-1/2 mx-0 md:mx-8 mb-8 md:mb-0">
     <div>
-      <section className="py-3">
+      <section className="py-3 flex items-center justify-center flex-col lg:items-start gap-1">
         <small className="text-gray-400 text-md">Saldo atual</small>
-        <h2 className="text-4xl font-bold">{currencyFormater(balance)}</h2>
+        <h2 className={`text-4xl font-bold ${balanceColorClass}`}>{currencyFormater(balance)}</h2>
       </section>
 
       <section className="flex items-center gap-2 py-3">
-        <button onClick={() => setShowAddExpenseModal(true)} className="btn btn-primary">+ Despesas</button>
-        <button onClick={() => setShowAddIncomeModal(true)} className="btn btn-primary-outline">+ Ganhos</button>
+        <button onClick={() => setShowAddExpenseModal(true)} className="btn btn-primary w-1/2">+ Despesas</button>
+        <button onClick={() => setShowAddIncomeModal(true)} className="btn btn-primary-outline w-1/2">+ Ganhos</button>
       </section>
     </div>
 
