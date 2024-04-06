@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Projeto Financeiro
 
-## Getting Started
+O projeto Financeiro é uma aplicação web desenvolvida com o framework Next.js, utilizando uma variedade de tecnologias como React, Firebase e Tailwind CSS. O objetivo deste projeto é oferecer uma solução para gerenciamento financeiro pessoal, permitindo aos usuários registrar despesas e receitas, visualizar gráficos e manter controle sobre suas finanças.
 
-First, run the development server:
+Este projeto faz parte do Trabalho de Conclusão de Curso da pós-graduação em Desenvolvimento Full-stack da Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS).
 
-```bash
+## Funcionalidades Principais
+
+* Registro de despesas e receitas pessoais.
+* Visualização de gráficos para análise financeira.
+* Autenticação de usuários utilizando Firebase.
+* Interface responsiva para acesso em diferentes dispositivos.
+
+## Instalação
+
+1. Certifique-se de ter o Node.js e o npm (ou yarn) instalados em sua máquina.
+2. Clone este repositório para sua máquina local.
+3. Navegue até o diretório do projeto no terminal.
+4. Execute o seguinte comando para instalar as dependências:
+
+npm install
+# ou
+yarn install
+
+## Configuração do Firebase
+
+1. Crie um projeto no Console do Firebase.
+2. Obtenha as credenciais do seu projeto (apiKey, authDomain, etc.).
+3. Cole as credenciais no arquivo lib/firebase/index.js.
+
+## Uso
+
+* Após instalar as dependências e configurar o Firebase, execute o seguinte comando para iniciar o servidor de desenvolvimento:
+
 npm run dev
-# or
+# ou
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* O servidor será iniciado em http://localhost:3000. Você pode acessar esta URL em seu navegador para visualizar o aplicativo.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Estrutura do Projeto
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+/pages: Contém os componentes React que definem as páginas do aplicativo.
+/components: Contém componentes reutilizáveis que são compartilhados entre diferentes partes do aplicativo.
+/lib: Contém utilitários e configurações compartilhadas, incluindo a integração com o Firebase.
+/public: Contém arquivos estáticos, como imagens e ícones.
+jsconfig.json, next.config.mjs, postcss.config.js, tailwind.config.js: Arquivos de configuração do Next.js, PostCSS e Tailwind CSS.
