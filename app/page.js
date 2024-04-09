@@ -11,7 +11,20 @@ import { authContext } from "@/lib/store/auth-context";
 import 'chart.js/auto';
 import 'chartjs-plugin-datalabels'; // Importando o plugin para adicionar os rótulos de dados
 
+
+
 export default function Home() {
+
+
+
+
+
+
+
+
+
+
+
 
   const [showAddIcomeModal, setShowAddIncomeModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
@@ -20,6 +33,42 @@ export default function Home() {
   const [balance, setBalance] = useState(0);
   const { expenses, income } = useContext(financeContext);
   const { user } = useContext(authContext);
+  const [sortBy, setSortBy] = useState(null);
+
+  
+
+  const handleSortByNameAsc = () => {
+    setSortBy('nameAsc');
+  };
+
+  const handleSortByNameDesc = () => {
+    setSortBy('nameDesc');
+  };
+
+  const handleSortByAmountAsc = () => {
+    setSortBy('amountAsc');
+  };
+
+  const handleSortByAmountDesc = () => {
+    setSortBy('amountDesc');
+  };
+
+  const sortedExpenses = sortBy
+    ? [...expenses].sort((a, b) => {
+        if (sortBy === 'nameAsc') {
+          return a.title.localeCompare(b.title);
+        } else if (sortBy === 'nameDesc') {
+          return b.title.localeCompare(a.title);
+        } else if (sortBy === 'amountAsc') {
+          return a.total - b.total;
+        } else if (sortBy === 'amountDesc') {
+          return b.total - a.total;
+        }
+        return 0;
+      })
+    : expenses;
+
+
 
   useEffect(() => {
     const newBalance = income.reduce((total, i) => {
@@ -49,8 +98,8 @@ export default function Home() {
         onClose={setShowAddExpenseModal}
       />
 
-      <main className="container max-w-6xl px-6 mx-auto my-4 flex flex-col md:flex-row">
-        <div className="w-full md:w-1/2 mx-0 md:mx-8 mb-2 md:mb-0">
+      <main className="container max-w-7xl px-6 mx-auto my-4 flex flex-col md:flex-row">
+        <div className="w-full md:w-2/2 mx-0 md:mx-8 mb-2 md:mb-0">
           <div>
             <section className="py-3 flex items-center justify-center flex-col lg:items-start gap-1">
               <small className="text-gray-400 text-md">Saldo atual</small>
@@ -64,12 +113,28 @@ export default function Home() {
           </div>
 
           <section className="py-6">
-            <h3 className="text-2xl">Relatório</h3>
-            <div className="flex flex-col gap-4 mt-6">
-              {expenses.map((expense) => {
-                return <ExpensiveCategoryItem key={expense.id} expense={expense} />;
-              })}
-            </div>
+            <h3 className="text-2xl text-center">Dashboard</h3>
+                {/* Botões de alternância para os filtros */}
+                <div className="flex justify-center my-4">
+                  <p className="flex items-center mr-2">Ordenar:</p>
+                  <button onClick={handleSortByNameAsc} className="btn btn-primary mr-2">
+                    A-Z
+                  </button>
+                  <button onClick={handleSortByNameDesc} className="btn btn-primary mr-2">
+                    Z-A
+                  </button>
+                  <button onClick={handleSortByAmountAsc} className="btn btn-primary mr-2">
+                    Menor valor
+                  </button>
+                  <button onClick={handleSortByAmountDesc} className="btn btn-primary">
+                    Maior valor
+                  </button>
+              </div>
+              <div className="flex flex-wrap gap-2 mt-6 justify-center overflow-y-auto height_dash">
+                {sortedExpenses.map((expense) => (
+                  <ExpensiveCategoryItem key={expense.id} expense={expense} />
+                ))}
+              </div>
           </section>
         </div>
 
