@@ -115,16 +115,16 @@ const amountSortButtonClass = sortBy === 'amountAsc' || sortBy === 'amountDesc' 
           <section className="pb-6">
                 {/* Botões de alternância para os filtros */}
                 <div className="flex justify-center my-4">
-                  <div className="flex flex-col lg:flex-row justify-center items-center">
+                  <div className="flex flex-row justify-center items-center">
                     <p className="flex items-center mr-2">Ordenar:</p>
-                    <div className="flex justify-center items-center pt-2 lg:pt-0">
+                    <div className="flex justify-center items-center">
                     <button onClick={handleSortByName} className={`btn btn-primary mr-2 ${nameSortButtonClass}`}>
-  {nameSortButtonText}
-</button>
+                        {nameSortButtonText}
+                      </button>
 
-<button onClick={handleSortByAmount} className={`btn btn-primary ${amountSortButtonClass}`}>
-  {amountSortButtonText}
-</button>
+                      <button onClick={handleSortByAmount} className={`btn btn-primary ${amountSortButtonClass}`}>
+                        {amountSortButtonText}
+                      </button>
                     </div>
                   </div>
               </div>
