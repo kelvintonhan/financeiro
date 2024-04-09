@@ -32,7 +32,7 @@ body {
 
 
 .height_dash {
-  height: 500px;
+  max-height: 500px;
 }
 
 .height_categories {
@@ -52,6 +52,11 @@ body {
   }
 }
 
+.active {
+  background-color: #facc15;
+  color: rgb(68 64 60 / var(--tw-bg-opacity));
+}
+
 
 @layer base {
   body {
@@ -59,7 +64,7 @@ body {
   }
 
   button {
-    @apply transition-all duration-100 hover:bg-yellow-400 hover:border-yellow-400 hover:text-stone-900;
+    @apply transition-all duration-100 hover:bg-yellow-400 hover:border-yellow-400 hover:text-stone-900 active:bg-yellow-400 active:border-yellow-400 active:text-stone-900;
   }
 
   input {

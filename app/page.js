@@ -17,15 +17,6 @@ export default function Home() {
 
 
 
-
-
-
-
-
-
-
-
-
   const [showAddIcomeModal, setShowAddIncomeModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [showChart, setShowChart] = useState(true); // Estado para mostrar ou ocultar o gráfico
@@ -37,36 +28,45 @@ export default function Home() {
 
   
 
-  const handleSortByNameAsc = () => {
-    setSortBy('nameAsc');
+  const handleSortByName = () => {
+    if (sortBy === 'nameAsc') {
+      setSortBy('nameDesc');
+    } else {
+      setSortBy('nameAsc');
+    }
   };
 
-  const handleSortByNameDesc = () => {
-    setSortBy('nameDesc');
+  const nameSortButtonText = sortBy === 'nameAsc' ? 'A - Z' : 'Z - A';
+
+
+  const handleSortByAmount = () => {
+    if (sortBy === 'amountAsc') {
+      setSortBy('amountDesc');
+    } else {
+      setSortBy('amountAsc');
+    }
   };
 
-  const handleSortByAmountAsc = () => {
-    setSortBy('amountAsc');
-  };
+  const amountSortButtonText = sortBy === 'amountAsc' ? 'Valor ▲' : 'Valor ▼';
 
-  const handleSortByAmountDesc = () => {
-    setSortBy('amountDesc');
-  };
+  const nameSortButtonClass = sortBy === 'nameAsc' || sortBy === 'nameDesc' ? 'active' : '';
+const amountSortButtonClass = sortBy === 'amountAsc' || sortBy === 'amountDesc' ? 'active' : '';
 
-  const sortedExpenses = sortBy
-    ? [...expenses].sort((a, b) => {
-        if (sortBy === 'nameAsc') {
-          return a.title.localeCompare(b.title);
-        } else if (sortBy === 'nameDesc') {
-          return b.title.localeCompare(a.title);
-        } else if (sortBy === 'amountAsc') {
-          return a.total - b.total;
-        } else if (sortBy === 'amountDesc') {
-          return b.total - a.total;
-        }
-        return 0;
-      })
-    : expenses;
+
+
+
+  const sortedExpenses = [...expenses].sort((a, b) => {
+    if (sortBy === 'nameAsc') {
+      return a.title.localeCompare(b.title);
+    } else if (sortBy === 'nameDesc') {
+      return b.title.localeCompare(a.title);
+    } else if (sortBy === 'amountAsc') {
+      return a.total - b.total;
+    } else if (sortBy === 'amountDesc') {
+      return b.total - a.total;
+    }
+    return 0;
+  });
 
 
 
@@ -112,23 +112,21 @@ export default function Home() {
             </section>
           </div>
 
-          <section className="py-6">
-            <h3 className="text-2xl text-center">Dashboard</h3>
+          <section className="pb-6">
                 {/* Botões de alternância para os filtros */}
                 <div className="flex justify-center my-4">
-                  <p className="flex items-center mr-2">Ordenar:</p>
-                  <button onClick={handleSortByNameAsc} className="btn btn-primary mr-2">
-                    A-Z
-                  </button>
-                  <button onClick={handleSortByNameDesc} className="btn btn-primary mr-2">
-                    Z-A
-                  </button>
-                  <button onClick={handleSortByAmountAsc} className="btn btn-primary mr-2">
-                    Menor valor
-                  </button>
-                  <button onClick={handleSortByAmountDesc} className="btn btn-primary">
-                    Maior valor
-                  </button>
+                  <div className="flex flex-col lg:flex-row justify-center items-center">
+                    <p className="flex items-center mr-2">Ordenar:</p>
+                    <div className="flex justify-center items-center pt-2 lg:pt-0">
+                    <button onClick={handleSortByName} className={`btn btn-primary mr-2 ${nameSortButtonClass}`}>
+  {nameSortButtonText}
+</button>
+
+<button onClick={handleSortByAmount} className={`btn btn-primary ${amountSortButtonClass}`}>
+  {amountSortButtonText}
+</button>
+                    </div>
+                  </div>
               </div>
               <div className="flex flex-wrap gap-2 mt-6 justify-center overflow-y-auto height_dash">
                 {sortedExpenses.map((expense) => (
